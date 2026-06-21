@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import videos from "../../data/videos";
+// import videos from "../../data/videos";
 import "./FoodStream.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,10 +8,24 @@ import { useNavigate } from "react-router-dom";
 export default function FoodStream() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [videos, setVideos] = useState([]);
 
-  const videoRef = useRef();
+  //   for connecting to backend
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/food/allFoods", { withCredentials: true })
+      .then((response) => {
+        setVideos(response.data.foods);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   const currentVideo = videos[index];
+
+  // for current video
+  const videoRef = useRef();
 
   useEffect(() => {
     if (videoRef.current) {
@@ -22,13 +36,20 @@ export default function FoodStream() {
   const nextVideo = () => {
     setDirection(1);
 
-    setIndex((prev) => (prev + 1) % videos.length);
+    setIndex((prev) => {
+      if (videos.length === 0) return prev;
+      return (prev + 1) % videos.length;
+    });
   };
 
   const previousVideo = () => {
     setDirection(-1);
 
-    setIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
+    setIndex((prev) => {
+      if (videos.length === 0) return prev;
+
+      return prev === 0 ? videos.length - 1 : prev - 1;
+    });
   };
 
   // Mouse wheel support
@@ -57,7 +78,7 @@ export default function FoodStream() {
     return () => {
       window.removeEventListener("wheel", handleWheel);
     };
-  }, []);
+  }, [videos]);
 
   // Touch support
 
@@ -78,8 +99,15 @@ export default function FoodStream() {
       previousVideo();
     }
   };
+  console.log("Index =", index);
+  console.log("Videos length =", videos.length);
 
-  //   for connecting to backend
+  if (currentVideo) {
+    console.log("Current =", currentVideo.name);
+  }
+  if (!currentVideo) {
+    return;
+  }
 
   return (
     <div
@@ -89,7 +117,7 @@ export default function FoodStream() {
     >
       <AnimatePresence mode="wait">
         <motion.div
-          key={currentVideo.id}
+          key={currentVideo._id}
           className="page"
           initial={{
             y: direction > 0 ? "100%" : "-100%",
@@ -106,7 +134,7 @@ export default function FoodStream() {
         >
           <video
             ref={videoRef}
-            src={currentVideo.videoUrl}
+            src={currentVideo.video}
             muted
             autoPlay
             playsInline
@@ -116,11 +144,11 @@ export default function FoodStream() {
           <div className="overlay" />
 
           <div className="card">
-            <h2>😋 {currentVideo.foodName}</h2>
+            <h2>😋 {currentVideo.name}</h2>
 
             <p>{currentVideo.description}</p>
 
-            <span>by {currentVideo.company}</span>
+            <span>by {currentVideo.foodPartner.name}</span>
 
             <button>Order Now</button>
           </div>

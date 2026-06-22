@@ -9,7 +9,7 @@ const upload = multer({
   storage: multer.memoryStorage(),
 });
 
-// protected
+// protected : for foodPartner
 router.post(
   "/",
   authMiddleware.authFoodPartnerMiddleware,
@@ -17,7 +17,7 @@ router.post(
   foodController.createFood,
 );
 
-// for all
+// for all users 
 router.get('/allFoods',authMiddleware.authUserMiddleware,foodController.getAllFoods)
 
 module.exports = router;

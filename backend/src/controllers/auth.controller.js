@@ -183,6 +183,8 @@ async function logoutFoodPartner(req, res) {
   });
 }
 
+
+
 module.exports = {
   registerUser,
   login,

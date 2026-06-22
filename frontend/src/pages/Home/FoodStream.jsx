@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./FoodStream.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function FoodStream() {
   const [index, setIndex] = useState(0);
@@ -147,8 +148,12 @@ export default function FoodStream() {
             <h2>😋 {currentVideo.name}</h2>
 
             <p>{currentVideo.description}</p>
-
-            <span>by {currentVideo.foodPartner.name}</span>
+            <Link
+              className=""
+              to={"/foodPartner/" + currentVideo.foodPartner._id}
+            >
+              <span>by {currentVideo.foodPartner.name}</span>
+            </Link>
 
             <button>Order Now</button>
           </div>

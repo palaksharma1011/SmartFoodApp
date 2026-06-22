@@ -43,4 +43,6 @@ async function getAllFoods(req, res) {
   });
 }
 
+
+
 module.exports = { createFood, getAllFoods };

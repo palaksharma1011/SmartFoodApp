@@ -6,6 +6,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+import ReelActions from "./ReelActions";
+
 export default function FoodStream() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -148,14 +150,13 @@ export default function FoodStream() {
             <h2>😋 {currentVideo.name}</h2>
 
             <p>{currentVideo.description}</p>
-            <Link
-              className=""
-              to={"/foodPartner/" + currentVideo.foodPartner._id}
-            >
-              <span>by {currentVideo.foodPartner.name}</span>
+            <Link to={"/foodPartner/" + currentVideo.foodPartner._id}>
+              <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white no-underline hover:scale-105 transition">
+                by {currentVideo.foodPartner.name}
+              </span>
+              <button className="orderbtn">Order Now</button>
             </Link>
-
-            <button>Order Now</button>
+            <ReelActions reelId={currentVideo._id} />
           </div>
         </motion.div>
       </AnimatePresence>

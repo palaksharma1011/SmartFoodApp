@@ -16,15 +16,24 @@ function PartnerLogin() {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const response = await axios.post(
-      "http://localhost:3000/api/auth/foodPartner/login",
-      { email, password },
-      {
-        withCredentials: true,
-      },
-    );
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/foodPartner/login",
+        { email, password },
+        {
+          withCredentials: true,
+        },
+      );
 
-    navigate("/createFood");
+      navigate("/createFood");
+    } catch (err) {
+      navigate("/error", {
+        state: {
+          status: err.response?.status,
+          message: err.response?.data?.message,
+        },
+      });
+    }
   };
 
   return (

@@ -15,20 +15,29 @@ function PartnerRegister() {
     const address = e.target.address.value;
     const phone = e.target.phone.value;
 
-    const response = await axios.post(
-      "http://localhost:3000/api/auth/foodPartner/register",
-      {
-        name,
-        email,
-        contactName,
-        password,
-        address,
-        phone,
-      },
-      { withCredentials: true },
-    );
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/foodPartner/register",
+        {
+          name,
+          email,
+          contactName,
+          password,
+          address,
+          phone,
+        },
+        { withCredentials: true },
+      );
 
-    navigate("/createFood");
+      navigate("/createFood");
+    } catch (err) {
+      navigate("/error", {
+        state: {
+          status: err.response?.status,
+          message: err.response?.data?.message,
+        },
+      });
+    }
   };
   return (
     <div className="auth-container">

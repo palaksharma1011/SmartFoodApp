@@ -148,7 +148,7 @@ async function loginFoodPartner(req, res) {
     });
   }
 
-  const isValidPassword = bcrypt.compare(password, foodPartner.password);
+  const isValidPassword = await bcrypt.compare(password, foodPartner.password);
 
   if (!isValidPassword) {
     return res.status(400).json({
@@ -182,8 +182,6 @@ async function logoutFoodPartner(req, res) {
     message: "Food Partner Logged out successfully",
   });
 }
-
-
 
 module.exports = {
   registerUser,

@@ -7,6 +7,7 @@ import PartnerRegister from "../pages/auth/PartnerRegister";
 import Home from "../pages/Home/Home";
 import CreateFood from "../pages/foodPartner/CreateFood";
 import FoodPartnerProfile from "../pages/user/FoodPartnerProfile";
+import ErrorPage from "../pages/error/errorPage";
 
 function AppRoutes() {
   return (
@@ -24,6 +25,8 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/createFood" element={<CreateFood />} />
         <Route path="/foodPartner/:id" element={<FoodPartnerProfile />} />
+
+        <Route path="/error" element ={<ErrorPage/>} />
       </Routes>
     </BrowserRouter>
   );

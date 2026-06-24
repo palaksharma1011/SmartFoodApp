@@ -6,7 +6,7 @@ const { v4: uuid } = require("uuid");
 async function createFood(req, res) {
   console.log("BODY:", req.body);
   console.log("FILE:", req.file);
-  const { name, video, description, foodPartner } = req.body;
+  const { name, video, description } = req.body;
 
   const fileUploadResult = await storageServices.uploadFile(
     req.file.buffer,
@@ -17,19 +17,16 @@ async function createFood(req, res) {
     name: name,
     video: fileUploadResult.url,
     description: description,
-    foodPartner: foodPartner,
+    foodPartner: req.foodPartner._id,
   });
 
-  const currfoodPartner = await foodPartnerModel.findById(foodPartner);
-
-  console.log(req.body);
   res.status(201).json({
     message: "New Food Item created",
     food: {
       name: food.name,
       video: food.video,
       description: food.description,
-      foodPartnerName: currfoodPartner.name,
+      foodPartnerName: req.foodPartner.name,
     },
   });
 }
@@ -42,7 +39,5 @@ async function getAllFoods(req, res) {
     foods,
   });
 }
-
-
 
 module.exports = { createFood, getAllFoods };

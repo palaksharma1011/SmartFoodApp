@@ -5,27 +5,37 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function UserLogin() {
-    const [showPassword, setShowPassword] = useState(false);
-    const [password, setPassword] = useState("");
-   
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const response = await axios.post(
-      "http://localhost:3000/api/auth/user/login",
-      {
-        email,
-        password,
-      },
-      {
-        withCredentials: true,
-      },
-    );
 
-    navigate("/");
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/user/login",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+
+      navigate("/");
+    } catch (err) {
+      navigate("/error", {
+        state: {
+          status: err.response?.status,
+          message: err.response?.data?.message,
+        },
+      });
+    }
   };
   return (
     <div className="auth-container">
@@ -45,27 +55,27 @@ function UserLogin() {
             <input type="email" name="email" placeholder="Enter your email" />
           </div>
 
-      <div className="form-group">
-        <label>Password</label>
+          <div className="form-group">
+            <label>Password</label>
 
-        <div className="password-box">
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <div className="password-box">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-          <button
-            type="button"
-            className="toggle-btn"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? "🙈 Hide" : "👁 Show"}
-          </button>
-        </div>
-      </div>
+              <button
+                type="button"
+                className="toggle-btn"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "🙈 Hide" : "👁 Show"}
+              </button>
+            </div>
+          </div>
 
           <button className="auth-btn" type="submit">
             Login 🍔
@@ -73,7 +83,7 @@ function UserLogin() {
         </form>
 
         <div className="bottom-text">
-          New here? <Link to="/user/register">Register Now</Link>
+          New here? <Link to="/register">Register Now</Link>
         </div>
       </div>
     </div>

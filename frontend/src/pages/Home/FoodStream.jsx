@@ -5,13 +5,14 @@ import "./FoodStream.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
-import ReelActions from "./ReelActions";
+import SaveButton from "../../components/SaveButton";
+import LikeButton from "../../components/LikeButton";
 
 export default function FoodStream() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [videos, setVideos] = useState([]);
+  const [comments, setComments] = useState(0);
 
   //   for connecting to backend
 
@@ -20,9 +21,17 @@ export default function FoodStream() {
       .get("http://localhost:3000/api/food/allFoods", { withCredentials: true })
       .then((response) => {
         setVideos(response.data.foods);
+        console.log(response);
       })
+
       .catch((err) => {
         console.log(err);
+        navigate("/error", {
+          state: {
+            status: err.response?.status,
+            message: err.response?.data?.message,
+          },
+        });
       });
   }, []);
   const currentVideo = videos[index];
@@ -102,11 +111,12 @@ export default function FoodStream() {
       previousVideo();
     }
   };
-  console.log("Index =", index);
-  console.log("Videos length =", videos.length);
+  // debugging error
+  // console.log("Index =", index);
+  // console.log("Videos length =", videos.length);
 
   if (currentVideo) {
-    console.log("Current =", currentVideo.name);
+    console.log(currentVideo._id);
   }
   if (!currentVideo) {
     return;
@@ -151,12 +161,19 @@ export default function FoodStream() {
 
             <p>{currentVideo.description}</p>
             <Link to={"/foodPartner/" + currentVideo.foodPartner._id}>
-              <span className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white no-underline hover:scale-105 transition">
-                by {currentVideo.foodPartner.name}
-              </span>
-              <button className="orderbtn">Order Now</button>
+              <span>by {currentVideo.foodPartner.name}</span>
             </Link>
-            <ReelActions reelId={currentVideo._id} />
+            <button className="orderbtn">Order Now</button>
+            <div className="reelActionContainer_xyz">
+              <LikeButton foodId={currentVideo._id} name="like" />
+              <div className="buttonText">{currentVideo.likeCount}</div>
+
+              <SaveButton foodId={currentVideo._id} name="save" />
+              <div className="buttonText">{currentVideo.saveCount}</div>
+
+              {/* <button of AI> */}
+              {/* <div className="buttonText">AI</div> */}
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>

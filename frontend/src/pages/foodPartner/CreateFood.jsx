@@ -36,7 +36,7 @@ export default function CreateFood() {
       navigate("/error", {
         state: {
           status: err.response?.status,
-          message: err.response?.data.message,
+          message:"u need to be a registered food partner for publishing food details and selling it",
         },
       });
     }

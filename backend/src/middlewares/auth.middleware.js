@@ -17,6 +17,7 @@ async function authFoodPartnerMiddleware(req, res, next) {
     const foodPartner = await foodPartnerModel.findById(decoded.id);
 
     req.foodPartner = foodPartner;
+    console.log("foodPartners are - " + req.foodPartner);
 
     next();
   } catch (err) {
@@ -41,6 +42,7 @@ async function authUserMiddleware(req, res, next) {
     const user = await userModel.findById(decoded.id);
 
     req.user = user;
+    console.log("user is : " + req.user);
 
     next();
   } catch (err) {

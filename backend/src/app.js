@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://smartfoodapp-backend.onrender.com",
+    origin: ["https://smartfoodapp-frontend.onrender.com"],
 
     credentials: true,
   }),

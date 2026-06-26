@@ -29,14 +29,14 @@ const UserProfile = () => {
           savedRes,
         ] = await Promise.all([
           // axios.get(
-          //     "http://localhost:3000/api/food/getSaved",
+          //     "https://smartfoodapp-backend.onrender.com/api/food/getSaved",
           //     { withCredentials: true }
           // ),
-          axios.get("http://localhost:3000/api/food/getLiked", {
+          axios.get("https://smartfoodapp-backend.onrender.com/api/food/getLiked", {
             withCredentials: true,
           }),
 
-          axios.get("http://localhost:3000/api/food/getSaved", {
+          axios.get("https://smartfoodapp-backend.onrender.com/api/food/getSaved", {
             withCredentials: true,
           }),
         ]);

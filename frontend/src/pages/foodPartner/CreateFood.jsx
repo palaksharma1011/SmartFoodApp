@@ -27,7 +27,7 @@ export default function CreateFood() {
     formData.append("video", video);
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/food/",
+        "https://smartfoodapp-backend.onrender.com/api/food/",
         formData,
         { withCredentials: true },
       );

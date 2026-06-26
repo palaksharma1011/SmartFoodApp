@@ -15,7 +15,7 @@ function SaveButton({ foodId, name }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/food/save",
+        "https://smartfoodapp-backend.onrender.com/api/food/save",
         { foodId: foodId },
         { withCredentials: true },
       );

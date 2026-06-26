@@ -21,7 +21,7 @@ function FoodPartnerProfile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/foodPartner/${id}`, {
+      .get(`https://smartfoodapp-backend.onrender.com/api/foodPartner/${id}`, {
         withCredentials: true,
       })
       .then((res) => {

@@ -14,7 +14,7 @@ function LikeButton({ foodId, name }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/food/like",
+        "https://smartfoodapp-backend.onrender.com/api/food/like",
         { foodId: foodId },
         { withCredentials: true },
       );

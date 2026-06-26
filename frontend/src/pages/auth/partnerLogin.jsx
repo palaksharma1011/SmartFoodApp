@@ -18,7 +18,7 @@ function PartnerLogin() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/foodPartner/login",
+        "https://smartfoodapp-backend.onrender.com/api/auth/foodPartner/login",
         { email, password },
         {
           withCredentials: true,

@@ -20,7 +20,7 @@ export default function FoodStream() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/food/allFoods", { withCredentials: true })
+      .get("https://smartfoodapp-backend.onrender.com/api/food/allFoods", { withCredentials: true })
       .then((response) => {
         setVideos(response.data.foods);
         console.log(response);

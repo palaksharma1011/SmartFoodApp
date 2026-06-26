@@ -17,7 +17,7 @@ function PartnerRegister() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/foodPartner/register",
+        "https://smartfoodapp-backend.onrender.com/api/auth/foodPartner/register",
         {
           name,
           email,

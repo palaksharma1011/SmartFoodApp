@@ -15,7 +15,7 @@ function UserRegister() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/user/register",
+        "https://smartfoodapp-backend.onrender.com/api/auth/user/register",
         {
           username,
           email,

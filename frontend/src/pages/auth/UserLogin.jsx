@@ -17,7 +17,7 @@ function UserLogin() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/user/login",
+        "https://smartfoodapp-backend.onrender.com/api/auth/user/login",
         {
           email,
           password,

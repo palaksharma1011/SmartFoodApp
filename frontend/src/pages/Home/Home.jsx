@@ -6,7 +6,7 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <main>
-      <section className="header">
+      <section className="header-userProfile">
         <div className="UserProfile">
           <button onClick={() => navigate("/user/profile")}>
             <img src="/svg/profile.svg" alt="Profile" />

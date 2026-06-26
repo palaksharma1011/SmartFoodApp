@@ -274,7 +274,7 @@ body {
   font-size: 11px;
 }
 
-.header {
+.header-userProfile {
   position: fixed;
   top: 0;
   left: 0;
@@ -310,6 +310,6 @@ body {
   button {
     background: transparent;
     /* box-shadow: 0 10px 30px rgba(255, 77, 79, 0.5); */
-    border:none;
+    border: none;
   }
 }

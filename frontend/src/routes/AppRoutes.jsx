@@ -7,7 +7,7 @@ import PartnerRegister from "../pages/auth/PartnerRegister";
 import Home from "../pages/Home/Home";
 import CreateFood from "../pages/foodPartner/CreateFood";
 import FoodPartnerProfile from "../pages/user/FoodPartnerProfile";
-import ErrorPage from "../pages/error/errorPage";
+import ErrorPage from "../pages/error/ErrorPage";
 import UserProfile from "../pages/user/UserProfile";
 
 function AppRoutes() {

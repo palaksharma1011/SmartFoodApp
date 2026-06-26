@@ -293,10 +293,6 @@ body {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
 
-  /* filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.8))
-    drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7))
-    drop-shadow(0 0 14px rgba(255, 255, 255, 0.15)); */
-
   img {
     width: clamp(31px, 3vw, 34px);
     height: auto;
@@ -309,5 +305,11 @@ body {
   }
   p {
     margin: 0;
+    text-decoration: underline;
+  }
+  button {
+    background: transparent;
+    /* box-shadow: 0 10px 30px rgba(255, 77, 79, 0.5); */
+    border:none;
   }
 }

@@ -17,13 +17,33 @@ router.post(
   foodController.createFood,
 );
 
-// for all users 
-router.get('/allFoods',authMiddleware.authUserMiddleware,foodController.getAllFoods)
-
-router.post("/like",authMiddleware.authUserMiddleware,foodController.likeFood);
-router.post("/save",
+// for all users
+router.get(
+  "/allFoods",
   authMiddleware.authUserMiddleware,
-  foodController.saveFood
-)
+  foodController.getAllFoods,
+);
+
+router.post(
+  "/like",
+  authMiddleware.authUserMiddleware,
+  foodController.likeFood,
+);
+router.post(
+  "/save",
+  authMiddleware.authUserMiddleware,
+  foodController.saveFood,
+);
+
+router.get(
+  "/getSaved",
+  authMiddleware.authUserMiddleware,
+  foodController.getSavedFood,
+);
+router.get(
+  "/getLiked",
+  authMiddleware.authUserMiddleware,
+  foodController.getLikedFood,
+);
 
 module.exports = router;

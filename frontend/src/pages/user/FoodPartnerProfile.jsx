@@ -11,26 +11,6 @@ import {
   FaFire,
 } from "react-icons/fa";
 
-// const foods = [
-//   {
-//     _id: 1,
-//     video:
-//       "https://ik.imagekit.io/nqoxo7hem/aa5ade3c-6132-4ebc-b7f0-b534106a0748_ETe_70jAyx",
-//     name: "Street Burger Reel",
-//     description: "Cheesy double patty burger with loaded fries.",
-//     tag: "Trending",
-//     views: "18K",
-//   },
-//   {
-//     _id: 2,
-//     video:
-//       "https://ik.imagekit.io/nqoxo7hem/aa5ade3c-6132-4ebc-b7f0-b534106a0748_ETe_70jAyx",
-//     name: "Pizza Short",
-//     description: "Wood-fired pepperoni pizza fresh from oven.",
-//     tag: "Popular",
-//     views: "7.2K",
-//   },
-// ];
 
 function FoodPartnerProfile() {
   const { id } = useParams();

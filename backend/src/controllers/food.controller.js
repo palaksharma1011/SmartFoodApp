@@ -2,6 +2,7 @@ const foodModel = require("../models/food.model");
 const foodPartnerModel = require("../models/foodpartner.model");
 const likesModel = require("../models/likes.model");
 const saveModel = require("../models/save.model");
+const userModel = require("../models/user.model");
 const storageServices = require("../services/storage.service");
 
 const { v4: uuid } = require("uuid");
@@ -117,4 +118,55 @@ async function saveFood(req, res) {
     save,
   });
 }
-module.exports = { createFood, getAllFoods, likeFood, saveFood };
+
+async function getSavedFood(req, res) {
+  const user = req.user;
+
+  const savedFoods = await saveModel
+    .find({
+      user: user._id,
+    })
+    .populate("food");
+
+  if (!savedFoods || savedFoods.length === 0) {
+    return res.status(404).json({
+      message: "No saved foods found",
+    });
+  }
+
+  res.status(200).json({
+    message: "Saved foods fetched",
+    savedFoods,
+  });
+}
+async function getLikedFood(req, res) {
+  const user = req.user;
+
+  const userData = await userModel.findById(user._id).select("-password");
+
+  const likedFoods = await likesModel
+    .find({
+      user: user._id,
+    })
+    .populate("food");
+
+  if (!likedFoods || likedFoods.length === 0) {
+    return res.status(404).json({
+      message: "No liked foods found",
+    });
+  }
+
+  return res.status(200).json({
+    message: "Liked foods fetched",
+    likedFoods,
+    userData,
+  });
+}
+module.exports = {
+  createFood,
+  getAllFoods,
+  likeFood,
+  saveFood,
+  getSavedFood,
+  getLikedFood,
+};

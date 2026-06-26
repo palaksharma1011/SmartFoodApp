@@ -14,6 +14,8 @@ export default function FoodStream() {
   const [videos, setVideos] = useState([]);
   const [comments, setComments] = useState(0);
 
+  const navigate=useNavigate();
+
   //   for connecting to backend
 
   useEffect(() => {

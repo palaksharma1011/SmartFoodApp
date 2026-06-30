@@ -9,18 +9,21 @@ import CreateFood from "../pages/foodPartner/CreateFood";
 import FoodPartnerProfile from "../pages/user/FoodPartnerProfile";
 import ErrorPage from "../pages/error/ErrorPage";
 import UserProfile from "../pages/user/UserProfile";
+import LandingPage from "../pages/LandingPage/LandingPage";
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Landing page without any credentials */}
+        <Route path='/' element={<LandingPage/>}/>
         {/* User Routes */}
         <Route path="/login" element={<UserLogin />} />
         <Route path="/register" element={<UserRegister />} />
         {/* Food Partner Routes */}
         <Route path="/partner/login" element={<PartnerLogin />} />
         <Route path="/partner/register" element={<PartnerRegister />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/createFood" element={<CreateFood />} />
         <Route path="/foodPartner/:id" element={<FoodPartnerProfile />} />
         <Route path="/user/profile" element={<UserProfile />} />;

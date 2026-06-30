@@ -1,0 +1,10 @@
+@import "tailwindcss";
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 9999px;
+  background: rgba(255, 107, 107, 0.15);
+  filter: blur(100px);
+  pointer-events: none;
+}

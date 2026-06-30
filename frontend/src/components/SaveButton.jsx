@@ -49,10 +49,35 @@ function SaveButton({ foodId, name }) {
 
   return (
     <button
-      className={`reelSaveBtn_xyz ${saved ? "reelSaved_xyz" : ""}`}
       onClick={handleSave}
+      className={`
+    flex
+    h-12
+    w-12
+    md:h-14
+    md:w-14
+    items-center
+    justify-center
+    bg-transparent
+    transition-all
+    duration-300
+    hover:scale-110
+    ${saved ? "scale-110" : ""}
+  `}
     >
-      <img src="/svg/save.svg" alt="" />
+      <img
+        src="/svg/save.svg"
+        alt=""
+        className={`
+      w-6
+      md:w-8
+      transition-all
+      duration-300
+      drop-shadow-[0_0_3px_rgba(0,0,0,0.8)]
+      drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]
+      ${saved ? "drop-shadow-[0_0_15px_rgba(255,210,0,0.8)]" : ""}
+    `}
+      />
     </button>
   );
 }

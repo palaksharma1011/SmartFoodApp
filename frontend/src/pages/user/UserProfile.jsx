@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
-import api from '../../api/axios';
+import api from "../../api/axios";
 import ProfileHeader from "../../components/UserProfile/ProfileHeader";
 import ReelTabs from "../../components/UserProfile/ReelTabs";
 import ReelGrid from "../../components/UserProfile/ReelGrid";
-
-import {
-  mockProfile,
-  likedReelsData,
-  savedReelsData,
-} from "../../data/mockProfileData";
-
+import { useNavigate } from "react-router-dom";
 import "./FoodPartnerProfile.css";
 
 const UserProfile = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("liked");
   const [profile, setProfile] = useState(null);
 
@@ -55,7 +50,7 @@ const UserProfile = () => {
         console.log(likedRes.data);
 
         console.log(savedRes.data);
-      }       catch(err) {
+      } catch (err) {
         console.log(err);
         navigate("/error", {
           state: {
@@ -63,7 +58,7 @@ const UserProfile = () => {
             message: err.response?.data?.message,
           },
         });
-      };
+      }
     };
 
     fetchProfileData();

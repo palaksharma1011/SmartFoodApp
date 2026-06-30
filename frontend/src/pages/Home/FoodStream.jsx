@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-// import videos from "../../data/videos";
-import "./FoodStream.css";
 import api from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -14,6 +12,7 @@ export default function FoodStream() {
   const [videos, setVideos] = useState([]);
   const [comments, setComments] = useState(0);
 
+
   const navigate = useNavigate();
 
   //   for connecting to backend
@@ -23,7 +22,6 @@ export default function FoodStream() {
       .get("/food/allFoods", { withCredentials: true })
       .then((response) => {
         setVideos(response.data.foods);
-        console.log(response);
       })
 
       .catch((err) => {
@@ -113,27 +111,20 @@ export default function FoodStream() {
       previousVideo();
     }
   };
-  // debugging error
-  // console.log("Index =", index);
-  // console.log("Videos length =", videos.length);
-
-  if (currentVideo) {
-    console.log(currentVideo._id);
-  }
   if (!currentVideo) {
     return;
   }
 
   return (
     <div
-      className="container"
+      className="relative h-screen w-full overflow-hidden bg-black"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       <AnimatePresence mode="wait">
         <motion.div
           key={currentVideo._id}
-          className="page"
+          className="absolute h-screen w-full"
           initial={{
             y: direction > 0 ? "100%" : "-100%",
           }}
@@ -154,27 +145,105 @@ export default function FoodStream() {
             autoPlay
             playsInline
             loop
+            className="h-full w-full object-cover"
           />
 
-          <div className="overlay" />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-          <div className="card">
-            <h2>😋 {currentVideo.name}</h2>
+          {/* Info Card */}
+          <div
+            className="
+          absolute
+          bottom-4
+          left-3
+          right-3
+          md:bottom-7
+          md:left-5
+          md:right-5
+          max-w-[700px]
+          rounded-[20px]
+          md:rounded-[30px]
+          bg-white/10
+          p-4
+          md:p-5
+          text-white
+          backdrop-blur-md
+        "
+          >
+            <h2 className="mb-2 text-[22px] font-bold md:text-[28px]">
+              😋 {currentVideo.name}
+            </h2>
 
-            <p>{currentVideo.description}</p>
+            <p className="text-sm leading-relaxed opacity-90 md:text-base">
+              {currentVideo.description}
+            </p>
+
             <Link to={"/foodPartner/" + currentVideo.foodPartner._id}>
-              <span>by {currentVideo.foodPartner.name}</span>
+              <span
+                className="
+              mt-3
+              block
+              rounded-xl
+              p-1
+              text-sm
+              font-semibold
+              text-white
+              md:text-base
+            "
+              >
+                by {currentVideo.foodPartner.name}
+              </span>
             </Link>
-            <button className="orderbtn">Order Now</button>
-            <div className="reelActionContainer_xyz">
+
+            <button
+              className="
+            mt-5
+            w-[80%]
+            rounded-full
+            bg-gradient-to-br
+            from-red-600
+            to-pink-400
+            px-5
+            py-4
+            text-base
+            font-bold
+            text-white
+            shadow-[0_10px_30px_rgba(255,77,79,0.5)]
+            transition
+            hover:scale-[1.02]
+            active:scale-95
+          "
+            >
+              Order Now
+            </button>
+
+            {/* Actions */}
+            <div
+              className="
+    fixed
+    right-2
+    md:right-5
+    top-1/2
+    z-[100]
+    flex
+    -translate-y-1/2
+    flex-col
+    items-center
+    gap-1
+          "
+            >
               <LikeButton foodId={currentVideo._id} name="like" />
-              <div className="buttonText">{currentVideo.likeCount}</div>
+
+              <div className="mb-2 text-xs font-medium text-white">
+                {currentVideo.likeCount}
+              </div>
 
               <SaveButton foodId={currentVideo._id} name="save" />
-              <div className="buttonText">{currentVideo.saveCount}</div>
 
-              {/* <button of AI> */}
-              {/* <div className="buttonText">AI</div> */}
+              <div className="mb-2 text-xs font-medium text-white">
+                {currentVideo.saveCount}
+              </div>
             </div>
           </div>
         </motion.div>

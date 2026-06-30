@@ -27,9 +27,9 @@ function UserLogin() {
         },
       );
 
-      navigate("/");
+      navigate("/home");
     } catch (err) {
-      navigate("/error", {
+      navigate("/autherror", {
         state: {
           status: err.response?.status,
           message: err.response?.data?.message,

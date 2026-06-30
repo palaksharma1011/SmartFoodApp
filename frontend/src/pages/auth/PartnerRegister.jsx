@@ -31,7 +31,7 @@ function PartnerRegister() {
 
       navigate("/createFood");
     } catch (err) {
-      navigate("/error", {
+      navigate("/autherror", {
         state: {
           status: err.response?.status,
           message: err.response?.data?.message,

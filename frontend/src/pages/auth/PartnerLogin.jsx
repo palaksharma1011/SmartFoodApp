@@ -2,7 +2,7 @@ import "./Auth.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from '../../api/axios';
+import api from "../../api/axios";
 
 function PartnerLogin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -27,7 +27,7 @@ function PartnerLogin() {
 
       navigate("/createFood");
     } catch (err) {
-      navigate("/error", {
+      navigate("/autherror", {
         state: {
           status: err.response?.status,
           message: err.response?.data?.message,

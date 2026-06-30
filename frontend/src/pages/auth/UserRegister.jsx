@@ -1,6 +1,6 @@
 import "./Auth.css";
 import { Link } from "react-router-dom";
-import api from '../../api/axios';
+import api from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import PasswordField from "../../components/PasswordField";
 
@@ -26,9 +26,9 @@ function UserRegister() {
         },
       );
 
-      navigate("/");
+      navigate("/home");
     } catch (err) {
-      navigate("/error", {
+      navigate("/autherror", {
         state: {
           status: err.response?.status,
           message: err.response?.data?.message,

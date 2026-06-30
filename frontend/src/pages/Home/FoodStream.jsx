@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 // import videos from "../../data/videos";
 import "./FoodStream.css";
-import api from '../../api/axios';
+import api from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SaveButton from "../../components/SaveButton";
@@ -14,7 +14,7 @@ export default function FoodStream() {
   const [videos, setVideos] = useState([]);
   const [comments, setComments] = useState(0);
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   //   for connecting to backend
 
@@ -28,7 +28,7 @@ export default function FoodStream() {
 
       .catch((err) => {
         console.log(err);
-        navigate("/error", {
+        navigate("/autherror", {
           state: {
             status: err.response?.status,
             message: err.response?.data?.message,

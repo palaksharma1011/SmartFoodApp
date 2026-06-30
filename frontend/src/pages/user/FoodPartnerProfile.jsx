@@ -11,13 +11,12 @@ import {
   FaFire,
 } from "react-icons/fa";
 
-
 function FoodPartnerProfile() {
   const { id } = useParams();
 
   const [profile, setProfile] = useState(null);
   const [videos, setVideos] = useState([]);
-    const [foods, setFoods] = useState([]);
+  const [foods, setFoods] = useState([]);
 
   useEffect(() => {
     axios
@@ -25,14 +24,20 @@ function FoodPartnerProfile() {
         withCredentials: true,
       })
       .then((res) => {
-        setProfile(res.data.foodPartner)
-        setFoods(res.data.foodPartner.allFood)
+        setProfile(res.data.foodPartner);
+        setFoods(res.data.foodPartner.allFood);
 
         console.log(res.data);
-        console.log(res.data.foodPartner.allFood)
+        console.log(res.data.foodPartner.allFood);
       })
       .catch((err) => {
         console.log(err);
+        navigate("/autherror", {
+          state: {
+            status: err.response?.status,
+            message: err.response?.data?.message,
+          },
+        });
       });
   }, [id]);
 

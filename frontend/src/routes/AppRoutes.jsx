@@ -10,6 +10,7 @@ import FoodPartnerProfile from "../pages/user/FoodPartnerProfile";
 import ErrorPage from "../pages/error/ErrorPage";
 import UserProfile from "../pages/user/UserProfile";
 import LandingPage from "../pages/LandingPage/LandingPage";
+import AuthErrorPage from "../pages/error/AuthError";
 
 function AppRoutes() {
   return (
@@ -23,11 +24,13 @@ function AppRoutes() {
         {/* Food Partner Routes */}
         <Route path="/partner/login" element={<PartnerLogin />} />
         <Route path="/partner/register" element={<PartnerRegister />} />
-        <Route path="/Home" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/createFood" element={<CreateFood />} />
         <Route path="/foodPartner/:id" element={<FoodPartnerProfile />} />
         <Route path="/user/profile" element={<UserProfile />} />;
         <Route path="/error" element={<ErrorPage />} />
+        <Route path="/autherror" element={<AuthErrorPage />} />
+
       </Routes>
     </BrowserRouter>
   );

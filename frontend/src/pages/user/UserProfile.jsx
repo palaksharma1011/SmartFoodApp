@@ -55,9 +55,15 @@ const UserProfile = () => {
         console.log(likedRes.data);
 
         console.log(savedRes.data);
-      } catch (error) {
-        console.log(error);
-      }
+      }       catch(err) {
+        console.log(err);
+        navigate("/error", {
+          state: {
+            status: err.response?.status,
+            message: err.response?.data?.message,
+          },
+        });
+      };
     };
 
     fetchProfileData();

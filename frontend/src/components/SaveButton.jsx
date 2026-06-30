@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
 function SaveButton({ foodId, name }) {
@@ -14,8 +14,8 @@ function SaveButton({ foodId, name }) {
     // if (loading) return;
 
     try {
-      const response = await axios.post(
-        "https://smartfoodapp-backend.onrender.com/api/food/save",
+      const response = await api.post(
+        "/food/save",
         { foodId: foodId },
         { withCredentials: true },
       );

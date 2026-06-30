@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./CreateFood.css";
-import axios from "axios";
+import api from '../../api/axios';
 
 import { useNavigate } from "react-router-dom";
 
@@ -26,8 +26,8 @@ export default function CreateFood() {
     formData.append("description", description);
     formData.append("video", video);
     try {
-      const response = await axios.post(
-        "https://smartfoodapp-backend.onrender.com/api/food/",
+      const response = await api.post(
+        "/food/",
         formData,
         { withCredentials: true },
       );

@@ -5,20 +5,21 @@ const cookieParser = require("cookie-parser");
 const foodRoutes = require("./routers/food.routes");
 const foodPartnerRoutes = require("./routers/foodPartner.routes");
 const cors = require("cors");
+const config = require("./config/config");
 
 const app = express();
 
 // midllewares
-app.use(express.json());
-
 app.use(
   cors({
-    origin: ["https://smartfoodapp-frontend.onrender.com"],
-
+    // origin: ["https://smartfoodapp-frontend.onrender.com"],
+    origin:config.CLIENT_URL,
     credentials: true,
   }),
 );
+app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 
 // health check
 app.get("/", (req, res) => {

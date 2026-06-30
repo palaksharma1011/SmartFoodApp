@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from '../api/axios';
 
 function LikeButton({ foodId, name }) {
   const [liked, setLiked] = useState(false);
@@ -13,8 +13,8 @@ function LikeButton({ foodId, name }) {
     // if (loading) return;
 
     try {
-      const response = await axios.post(
-        "https://smartfoodapp-backend.onrender.com/api/food/like",
+      const response = await api.post(
+        "/food/like",
         { foodId: foodId },
         { withCredentials: true },
       );

@@ -1,7 +1,7 @@
 import PasswordField from "../../components/PasswordField";
 import "./Auth.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from '../../api/axios';
 import { useNavigate } from "react-router-dom";
 
 function PartnerRegister() {
@@ -16,8 +16,8 @@ function PartnerRegister() {
     const phone = e.target.phone.value;
 
     try {
-      const response = await axios.post(
-        "https://smartfoodapp-backend.onrender.com/api/auth/foodPartner/register",
+      const response = await api.post(
+        "/auth/foodPartner/register",
         {
           name,
           email,

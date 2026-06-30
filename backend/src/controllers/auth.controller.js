@@ -3,6 +3,7 @@ const userModel = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const foodPartnerModel = require("../models/foodpartner.model");
+const config = require('../config/config');
 
 async function registerUser(req, res) {
   const { username, email, password } = req.body;
@@ -28,15 +29,15 @@ async function registerUser(req, res) {
     {
       id: user._id,
     },
-    process.env.JWT_SECRET_KEY,
+    config.JWT_SECRET_KEY,
   );
 
   res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  maxAge: 7 * 24 * 60 * 60 * 1000, // optional
-});
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // optional
+  });
 
   res.status(201).json({
     message: "User Created successfully",
@@ -72,15 +73,15 @@ async function login(req, res) {
     {
       id: user._id,
     },
-    process.env.JWT_SECRET_KEY,
+    config.JWT_SECRET_KEY,
   );
 
   res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  maxAge: 7 * 24 * 60 * 60 * 1000, // optional
-});
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // optional
+  });
 
   res.status(200).json({
     message: "User Logged In Successfully",
@@ -127,15 +128,15 @@ async function registerFoodPartner(req, res) {
     {
       id: foodPartner._id,
     },
-    process.env.JWT_SECRET_KEY,
+    config.JWT_SECRET_KEY,
   );
 
   res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  maxAge: 7 * 24 * 60 * 60 * 1000, // optional
-});
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // optional
+  });
 
   res.status(201).json({
     message: "Food Partner registered",
@@ -174,15 +175,15 @@ async function loginFoodPartner(req, res) {
     {
       id: foodPartner._id,
     },
-    process.env.JWT_SECRET_KEY,
+    config.JWT_SECRET_KEY,
   );
 
   res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "none",
-  maxAge: 7 * 24 * 60 * 60 * 1000, // optional
-});
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // optional
+  });
   res.status(200).json({
     message: "Food Partner Logged in successfully",
     foodPartner: {

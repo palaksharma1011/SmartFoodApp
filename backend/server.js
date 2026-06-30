@@ -1,10 +1,10 @@
 // start server
-require('dotenv').config();
 const app = require("./src/app");
 const connectDB = require("./src/db/db");
+const config= require('./src/config/config');
 
 connectDB();
 
-app.listen(process.env.PORT, () => {
+app.listen(config.PORT, () => {
   console.log("Server running...");
 });

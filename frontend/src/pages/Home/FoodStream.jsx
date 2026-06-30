@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 // import videos from "../../data/videos";
 import "./FoodStream.css";
-import axios from "axios";
+import api from '../../api/axios';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SaveButton from "../../components/SaveButton";
@@ -19,8 +19,8 @@ export default function FoodStream() {
   //   for connecting to backend
 
   useEffect(() => {
-    axios
-      .get("https://smartfoodapp-backend.onrender.com/api/food/allFoods", { withCredentials: true })
+    api
+      .get("/food/allFoods", { withCredentials: true })
       .then((response) => {
         setVideos(response.data.foods);
         console.log(response);

@@ -2,7 +2,7 @@ import "./Auth.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from '../../api/axios';
 
 function PartnerLogin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,8 +17,8 @@ function PartnerLogin() {
     const password = e.target.password.value;
 
     try {
-      const response = await axios.post(
-        "https://smartfoodapp-backend.onrender.com/api/auth/foodPartner/login",
+      const response = await api.post(
+        "/auth/foodPartner/login",
         { email, password },
         {
           withCredentials: true,

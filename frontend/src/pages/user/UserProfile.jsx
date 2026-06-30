@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from '../../api/axios';
 import ProfileHeader from "../../components/UserProfile/ProfileHeader";
 import ReelTabs from "../../components/UserProfile/ReelTabs";
 import ReelGrid from "../../components/UserProfile/ReelGrid";
@@ -32,11 +32,11 @@ const UserProfile = () => {
           //     "https://smartfoodapp-backend.onrender.com/api/food/getSaved",
           //     { withCredentials: true }
           // ),
-          axios.get("https://smartfoodapp-backend.onrender.com/api/food/getLiked", {
+          api.get("/food/getLiked", {
             withCredentials: true,
           }),
 
-          axios.get("https://smartfoodapp-backend.onrender.com/api/food/getSaved", {
+          api.get("/food/getSaved", {
             withCredentials: true,
           }),
         ]);

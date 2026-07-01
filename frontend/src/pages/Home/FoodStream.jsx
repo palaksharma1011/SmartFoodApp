@@ -123,7 +123,14 @@ export default function FoodStream() {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentVideo._id}
-          className="absolute h-screen w-full"
+          className="    
+    absolute
+    flex
+    h-screen
+    w-full
+    items-center
+    justify-center
+    bg-black"
           initial={{
             y: direction > 0 ? "100%" : "-100%",
           }}
@@ -137,22 +144,42 @@ export default function FoodStream() {
             duration: 0.5,
           }}
         >
-          <video
-            ref={videoRef}
-            src={currentVideo.video}
-            muted
-            autoPlay
-            playsInline
-            loop
-            className="h-full w-full object-cover"
-          />
-
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-
-          {/* Info Card */}
           <div
             className="
+      relative
+      h-screen
+      w-full
+
+      md:h-[95vh]
+      md:max-h-[900px]
+
+      md:w-[420px]
+      lg:w-[450px]
+
+      overflow-hidden
+      bg-black
+      md:rounded-3xl
+      md:border
+      md:border-white/10
+      md:shadow-[0_0_80px_rgba(255,255,255,0.05)]
+    "
+          >
+            <video
+              ref={videoRef}
+              src={currentVideo.video}
+              muted
+              autoPlay
+              playsInline
+              loop
+              className="h-full w-full object-cover"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+
+            {/* Info Card */}
+            <div
+              className="
           absolute
           bottom-4
           left-3
@@ -169,18 +196,18 @@ export default function FoodStream() {
           text-white
           backdrop-blur-md
         "
-          >
-            <h2 className="mb-2 text-[22px] font-bold md:text-[28px]">
-              😋 {currentVideo.name}
-            </h2>
+            >
+              <h2 className="mb-2 text-[22px] font-bold md:text-[28px]">
+                😋 {currentVideo.name}
+              </h2>
 
-            <p className="text-sm leading-relaxed opacity-90 md:text-base">
-              {currentVideo.description}
-            </p>
+              <p className="text-sm leading-relaxed opacity-90 md:text-base">
+                {currentVideo.description}
+              </p>
 
-            <Link to={"/foodPartner/" + currentVideo.foodPartner._id}>
-              <span
-                className="
+              <Link to={"/foodPartner/" + currentVideo.foodPartner._id}>
+                <span
+                  className="
               mt-3
               block
               rounded-xl
@@ -190,13 +217,13 @@ export default function FoodStream() {
               text-white
               md:text-base
             "
-              >
-                by {currentVideo.foodPartner.name}
-              </span>
-            </Link>
+                >
+                  by {currentVideo.foodPartner.name}
+                </span>
+              </Link>
 
-            <button
-              className="
+              <button
+                className="
             mt-5
             w-[80%]
             rounded-full
@@ -213,13 +240,13 @@ export default function FoodStream() {
             hover:scale-[1.02]
             active:scale-95
           "
-            >
-              Order Now
-            </button>
+              >
+                Order Now
+              </button>
 
-            {/* Actions */}
-            <div
-              className="
+              {/* Actions */}
+              <div
+                className="
     fixed
     right-2
     md:right-5
@@ -231,17 +258,18 @@ export default function FoodStream() {
     items-center
     gap-3
           "
-            >
-              <LikeButton
-                foodId={currentVideo._id}
-                name="like"
-                count={currentVideo.likeCount}
-              />
-              <SaveButton
-                foodId={currentVideo._id}
-                name="save"
-                count={currentVideo.saveCount}
-              />
+              >
+                <LikeButton
+                  foodId={currentVideo._id}
+                  name="like"
+                  count={currentVideo.likeCount}
+                />
+                <SaveButton
+                  foodId={currentVideo._id}
+                  name="save"
+                  count={currentVideo.saveCount}
+                />
+              </div>
             </div>
           </div>
         </motion.div>

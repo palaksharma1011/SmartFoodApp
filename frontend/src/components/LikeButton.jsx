@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from '../api/axios';
+import api from "../api/axios";
 
-function LikeButton({ foodId, name }) {
+function LikeButton({ foodId, name, count }) {
   const [liked, setLiked] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [likeCount, setLikeCount] = useState(count);
+  const [videos, setVideos] = useState([]);
   const navigate = useNavigate();
 
-  const [videos, setVideos] = useState([]);
-
-  async function handleLike() {
+  async function handleLike(e) {
     // if (loading) return;
+    e.preventDefault();
 
     try {
       const response = await api.post(
@@ -22,6 +22,7 @@ function LikeButton({ foodId, name }) {
       if (response.data.like) {
         console.log("Video liked");
         setLiked(true);
+        setLikeCount((prev) => prev + 1);
         setVideos((prev) =>
           prev.map((v) =>
             v._id === foodId ? { ...v, likeCount: v.likeCount + 1 } : v,
@@ -30,6 +31,7 @@ function LikeButton({ foodId, name }) {
       } else {
         console.log("Video unliked");
         setLiked(false);
+        setLikeCount((prev) => prev - 1);
         setVideos((prev) =>
           prev.map((v) =>
             v._id === foodId ? { ...v, likeCount: v.likeCount - 1 } : v,
@@ -48,41 +50,43 @@ function LikeButton({ foodId, name }) {
   }
 
   return (
-<button
-  onClick={handleLike}
-  className={`
-    flex
-    h-12
-    w-12
-    md:h-14
-    md:w-14
-    items-center
-    justify-center
-    bg-transparent
+    <div className="flex flex-col items-center">
+      <button
+        onClick={handleLike}
+        className={`
+    w-6
+    md:w-8
     transition-all
     duration-300
-    hover:scale-110
-    ${liked ? "scale-110" : ""}
-  `}
->
-  <img
-    src="/svg/like.svg"
-    alt=""
-    className={`
+    ${
+      liked
+        ? `
+          scale-125
+          brightness-150
+          rotate-12
+          drop-shadow-[0_0_20px_rgb(255,0,100)]
+          `
+        : ""
+    }
+`}
+      >
+        <img
+          src="/svg/like.svg"
+          alt=""
+          className={`
       w-6
       md:w-8
       transition-all
       duration-300
       drop-shadow-[0_0_3px_rgba(0,0,0,0.8)]
       drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]
-      ${
-        liked
-          ? "drop-shadow-[0_0_15px_rgba(255,60,100,0.8)]"
-          : ""
-      }
+      ${liked ? "drop-shadow-[0_0_15px_rgba(255,60,100,0.8)]" : ""}
     `}
-  />
-</button>
+        />
+      </button>
+
+      <div className="text-white text-xs">{likeCount}</div>
+    </div>
   );
 }
 

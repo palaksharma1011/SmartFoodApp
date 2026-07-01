@@ -12,7 +12,6 @@ export default function FoodStream() {
   const [videos, setVideos] = useState([]);
   const [comments, setComments] = useState(0);
 
-
   const navigate = useNavigate();
 
   //   for connecting to backend
@@ -230,20 +229,19 @@ export default function FoodStream() {
     -translate-y-1/2
     flex-col
     items-center
-    gap-1
+    gap-3
           "
             >
-              <LikeButton foodId={currentVideo._id} name="like" />
-
-              <div className="mb-2 text-xs font-medium text-white">
-                {currentVideo.likeCount}
-              </div>
-
-              <SaveButton foodId={currentVideo._id} name="save" />
-
-              <div className="mb-2 text-xs font-medium text-white">
-                {currentVideo.saveCount}
-              </div>
+              <LikeButton
+                foodId={currentVideo._id}
+                name="like"
+                count={currentVideo.likeCount}
+              />
+              <SaveButton
+                foodId={currentVideo._id}
+                name="save"
+                count={currentVideo.saveCount}
+              />
             </div>
           </div>
         </motion.div>
